@@ -20,8 +20,7 @@ bool OpenGLApp::Init()
 {
 	if (!InitWindow())
 		return false;
-	GladApp glad;
-	if (!glad.Init())
+	if (!GladApp::Init())
 		return false;
 	if (!InitShader())
 		return false;
@@ -133,7 +132,7 @@ int OpenGLApp::Run()
 	this->UpdateWindow();
 	auto endTime = std::chrono::high_resolution_clock::now();
 	auto timeDuration = endTime - startTime;
-	std::cout << "duration time :" << timeDuration.count() <<"ms" << std::endl;
+	std::cout << "duration time :" << timeDuration.count() <<"ns" << std::endl;
 	return 0;
 }
 
