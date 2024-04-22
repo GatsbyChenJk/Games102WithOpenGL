@@ -1,12 +1,13 @@
 #pragma once
+#ifndef OPENGLAPP_H
+#define OPENGLAPP_H
+
 #include "GladApp.h"
 #include <GLFW/glfw3.h>
 #include <memory>
 #include <string>
 #include <chrono>
 #include "Shader.h"
-#ifndef OPENGLAPP_H
-#define OPENGLAPP_H
 
 class OpenGLApp
 {

@@ -1,9 +1,6 @@
 #pragma once
 #include "Interpolation.h"
 
-Interpolation::Interpolation()
-{
-}
 
 Interpolation::Interpolation(std::vector<glm::vec2> inputs)
 	:observationPoints(std::move(inputs))
@@ -17,11 +14,9 @@ float Interpolation::GetBaseFunction2D(float x, float x_0, float x_1, float x_2)
 	return numerator / denominator;
 }
 
-float Interpolation::GetDifferenceQuotient2D(glm::vec2 P_1, glm::vec2 P_2)
+float Interpolation::GetDifferenceQuotient2D(glm::vec2 P_1, glm::vec2 P_2, glm::vec2 P_3)
 {
-	float numerator = P_1.y - P_2.y;
-	float denominator = P_1.x - P_2.x;
-	return numerator / denominator;
+	
 }
 
 float Interpolation::GetEstimateNum2D(int pointNum, InterpolationMethod method)
