@@ -29,12 +29,12 @@ public:
 	Interpolation() = default;
 	Interpolation(std::vector<glm::vec2> inputs);
 	~Interpolation() = default;
+private:
 	// Lagrange Method
 	float GetBaseFunction2D(float x, float x_0, float x_1, float x_2);
-
 	// Newton Method
 	void GetDifferenceQuotient2D(glm::vec2 P_1, glm::vec2 P_2, glm::vec2 P_3);
-
+public:
 	// calculation
 	void GetEstimateNum2D(float input, InterpolationMethod method);
 	void ComputeErrorRate2D();

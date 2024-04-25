@@ -44,6 +44,7 @@ void Interpolation::GetEstimateNum2D(float input, InterpolationMethod method)
 	// y = f[x_0] + f[x_0,x_1]*(x - x_0) + f[x_0,x_1,x_2]*(x - x_0)*(x - x_1)
 	if (method == NewTon)
 	{
+		GetDifferenceQuotient2D(observationPoints[0], observationPoints[1], observationPoints[2]);
 		float y = observationPoints[0].y + differenceEveryLevel[0] * (input - observationPoints[0].x) +
 			differenceEveryLevel[1] * (input - observationPoints[0].x) * (input - observationPoints[1].x);
 		interpolatePoints.push_back(glm::vec2(input, y));

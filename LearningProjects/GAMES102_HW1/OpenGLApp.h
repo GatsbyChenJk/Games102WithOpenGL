@@ -4,20 +4,32 @@
 
 #include "GladApp.h"
 #include <GLFW/glfw3.h>
+#include <vector>
 #include <memory>
 #include <string>
 #include <chrono>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Shader.h"
+#include "Interpolation.h"
 
 class OpenGLApp
 {
+private:
+	int vectorSize;
+
 public:
 	int GL_MajorVersion;
 	int GL_MinorVersion;
 	
 	unsigned int GL_VAO;                                                                                         // Vertex Array Object
 	unsigned int GL_VBO;                                                                                         // Vertex Buffer Object
-
+	unsigned int GL_VAO_Func;
+	unsigned int GL_VBO_Func;
+	unsigned int GL_VAO_Inter;
+	unsigned int GL_VBO_Inter;
+	
 	struct GLFWWindowDeleter                                                                                     // Window Pointer Deleter
 	{
 		void operator()(GLFWwindow* window) const 
