@@ -23,12 +23,12 @@ public:
 	int GL_MajorVersion;
 	int GL_MinorVersion;
 	
-	unsigned int GL_VAO;                                                                                         // Vertex Array Object
-	unsigned int GL_VBO;                                                                                         // Vertex Buffer Object
-	unsigned int GL_VAO_Func;
-	unsigned int GL_VBO_Func;
-	unsigned int GL_VAO_Inter;
-	unsigned int GL_VBO_Inter;
+	unsigned int GL_VAO;                                                                                         // Vertex Array Object For Axis
+	unsigned int GL_VBO;                                                                                         // Vertex Buffer Object For Axis
+	unsigned int GL_VAO_Func;                                                                                    // Vertex Array Object For Func Curve
+	unsigned int GL_VBO_Func;                                                                                    // Vertex Buffer Object For Func Curve 
+	unsigned int GL_VAO_Inter;                                                                                   // Vertex Array Object For Interpolate Curve
+	unsigned int GL_VBO_Inter;                                                                                   // Vertex Buffer Object For Interpolate Curve
 	
 	struct GLFWWindowDeleter                                                                                     // Window Pointer Deleter
 	{

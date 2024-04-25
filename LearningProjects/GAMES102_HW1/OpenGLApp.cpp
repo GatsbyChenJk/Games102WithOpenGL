@@ -66,14 +66,14 @@ bool OpenGLApp::InitShader()
 bool OpenGLApp::InitResources()
 {
 	// set up vertex data (and buffer(s)) and configure vertex attributes
-   // ------------------------------------------------------------------
-	std::vector<float> vertices = 
+    // ------------------------------------------------------------------
+	std::vector<glm::vec3> vertices = 
 	{
-		// --------------axis init----------------
-		// positions         // colors
-		 10.0f, -5.0f, 0.0f,  0.0f, 0.0f, 0.0f,  
-		 -5.0f, -5.0f, 0.0f,  0.0f, 0.0f, 0.0f, 
-		 -5.0f,  10.0f, 0.0f,  0.0f, 0.0f, 0.0f  
+		          // --------------axis init----------------
+		          // positions                // colors
+		 glm::vec3(10.0f, -5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),  
+		 glm::vec3(-5.0f, -5.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+		 glm::vec3(-5.0f, 10.0f, 0.0f), glm::vec3( 0.0f, 0.0f, 0.0f)
 	};
 
 	std::vector<glm::vec3> functionPoints;
@@ -121,13 +121,13 @@ bool OpenGLApp::InitResources()
 	glBindVertexArray(GL_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, GL_VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3) * 2, vertices.data(), GL_STATIC_DRAW);
 
 	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)0);
 	glEnableVertexAttribArray(0);
 	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)(sizeof(glm::vec3)));
 	glEnableVertexAttribArray(1);
 	// -------------------------------------------------------------------------------------------------------------------
 
@@ -202,6 +202,9 @@ void OpenGLApp::UpdateWindow()
 	glDeleteBuffers(1, &GL_VBO);
 	glDeleteVertexArrays(1, &GL_VAO_Func);
 	glDeleteBuffers(1, &GL_VBO_Func);
+	glDeleteVertexArrays(1, &GL_VAO_Inter);
+	glDeleteBuffers(1, &GL_VBO_Inter);
+
 }
 
 void OpenGLApp::ResizeWindow(GLFWwindow* RawWindow, int resizeWidth, int resizeHeight)

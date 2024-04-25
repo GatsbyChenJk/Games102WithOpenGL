@@ -20,9 +20,7 @@ class Interpolation
 public:
 	std::vector<glm::vec2> observationPoints;
 	std::vector<glm::vec2> interpolatePoints;
-	std::vector<float> differenceEveryLevel;
-	int outPutPointsNum;
-	float ErrorRate;
+	std::vector<float> differenceEveryLevel;	
 	
 
 public:
@@ -37,7 +35,6 @@ private:
 public:
 	// calculation
 	void GetEstimateNum2D(float input, InterpolationMethod method);
-	void ComputeErrorRate2D();
 };
 
 

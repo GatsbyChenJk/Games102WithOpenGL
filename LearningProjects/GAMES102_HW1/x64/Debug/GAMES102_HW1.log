@@ -1,6 +1,7 @@
-﻿  glad.c
-  HW1.cpp
+﻿  HW1.cpp
+  Interpolation.cpp
   OpenGLApp.cpp
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\OpenGLApp.cpp(88,36): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
   Shader.cpp
   正在生成代码...
 glfw3.lib(init.obj) : warning LNK4099: 未找到 PDB“glfw3.pdb”(使用“glfw3.lib(init.obj)”或在“D:\Programming\Games102WithOpenGL\LearningProjects\x64\Debug\glfw3.pdb”中寻找)；正在链接对象，如同没有调试信息一样
