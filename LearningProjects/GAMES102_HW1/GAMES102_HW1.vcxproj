@@ -73,10 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>../../includes;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>../../libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExternalIncludePath>../../includes;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>../../libs;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,13 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GladApp.h" />
+    <ClInclude Include="ImGuiApp.h" />
     <ClInclude Include="Interpolation.h" />
     <ClInclude Include="OpenGLApp.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\includes\imgui\imgui.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\..\includes\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\..\libs\glad.c" />
     <ClCompile Include="HW1.cpp" />
+    <ClCompile Include="ImGuiApp.cpp" />
     <ClCompile Include="Interpolation.cpp" />
     <ClCompile Include="OpenGLApp.cpp" />
     <ClCompile Include="Shader.cpp" />

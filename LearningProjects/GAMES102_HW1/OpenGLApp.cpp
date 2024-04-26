@@ -8,7 +8,8 @@ OpenGLApp::OpenGLApp(const std::string& WindowName, int initWidth, int initHeigh
 	GL_windowHeight(initHeight), 
 	GL_windowWidth(initWidth),
 	GL_MajorVersion(MajorVersion),
-	GL_MinorVersion(MinorVersion)
+	GL_MinorVersion(MinorVersion),
+	GL_Projection(glm::ortho(-6.0f, 6.0f, -6.0f, 6.0f, -1.0f, 1.0f))
 {
 }
 
@@ -25,6 +26,8 @@ bool OpenGLApp::Init()
 	if (!InitShader())
 		return false;
 	if (!InitResources())
+		return false;
+	if (!InitImGui())
 		return false;
 
 	return true;
@@ -46,7 +49,8 @@ bool OpenGLApp::InitWindow()
 	}
 	// IMPORTANT!! Call this func to ensure that GLAD can be initialized
 	glfwMakeContextCurrent(rawWindow);
-	//------------------------------------------------------------------
+	//------------------------------------------------------------------	
+
 	GL_window.reset(rawWindow);
 	if (GL_window != nullptr)
 		return true;
@@ -58,6 +62,15 @@ bool OpenGLApp::InitShader()
 {
 	GL_shader = Shader::create("vertexCode.txt", "fragmentCode.txt");
 	if (GL_shader != nullptr)
+		return true;
+	else
+		return false;
+}
+
+bool OpenGLApp::InitImGui()
+{
+	GL_ImGuiObject = ImGuiApp::createImGuiPtr("ImGui Out!", "#version 150");
+	if (GL_ImGuiObject != nullptr)
 		return true;
 	else
 		return false;
@@ -171,30 +184,34 @@ bool OpenGLApp::InitResources()
 void OpenGLApp::UpdateWindow()
 {
 	glfwSetFramebufferSizeCallback(GL_window.get(), OpenGLApp::ResizeWindow);
+	
+	GL_ImGuiObject.get()->Init(GL_window.get());
 
 	while (!glfwWindowShouldClose(GL_window.get()))
-	{
-		// set background color	
+	{		
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		
+		GL_ImGuiObject.get()->SetUIDetail(GL_Projection);
+		GL_ImGuiObject.get()->RenderOnWindow(GL_window.get());
 		// render
 		GL_shader.get()->use();
-		// set vertex range by projection matrix
-		glm::mat4 projection = glm::ortho(-6.0f, 6.0f, -6.0f, 6.0f, -1.0f, 1.0f);
-		GL_shader.get()->setMat4("projection", projection);
-		
+		// set vertex range by projection matrix		
+		GL_shader.get()->setMat4("projection", GL_Projection);
+
 		glBindVertexArray(GL_VAO);
 		glDrawArrays(GL_LINE_STRIP, 0, 3);
 
 		glBindVertexArray(GL_VAO_Func);
-		glDrawArrays(GL_LINE_STRIP, 0, vectorSize/2);
+		glDrawArrays(GL_LINE_STRIP, 0, vectorSize / 2);
 
 		glBindVertexArray(GL_VAO_Inter);
 		glDrawArrays(GL_LINE_STRIP, 0, 3);
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------
-		glfwSwapBuffers(GL_window.get());
+		
 		glfwPollEvents();
+		glfwSwapBuffers(GL_window.get());
 	}
 	// optional: de-allocate all resources once they've outlived their purpose:
 	// ------------------------------------------------------------------------
@@ -204,6 +221,11 @@ void OpenGLApp::UpdateWindow()
 	glDeleteBuffers(1, &GL_VBO_Func);
 	glDeleteVertexArrays(1, &GL_VAO_Inter);
 	glDeleteBuffers(1, &GL_VBO_Inter);
+
+	GL_ImGuiObject.get()->Destroy();
+
+	//glfwDestroyWindow(GL_window.get());
+	glfwTerminate();
 
 }
 
@@ -218,7 +240,7 @@ int OpenGLApp::Run()
 	this->UpdateWindow();
 	auto endTime = std::chrono::high_resolution_clock::now();
 	auto timeDuration = endTime - startTime;
-	std::cout << "duration time :" << timeDuration.count() <<"ns" << std::endl;
+	std::cout << "duration time :" << timeDuration.count()/static_cast<float>(10e9) <<"s" << std::endl;
 	return 0;
 }
 

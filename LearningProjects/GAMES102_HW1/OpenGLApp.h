@@ -11,8 +11,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw.h>
+#include <imgui/imgui_impl_opengl3.h>
 #include "Shader.h"
 #include "Interpolation.h"
+#include "ImGuiApp.h"
 
 class OpenGLApp
 {
@@ -29,7 +33,8 @@ public:
 	unsigned int GL_VBO_Func;                                                                                    // Vertex Buffer Object For Func Curve 
 	unsigned int GL_VAO_Inter;                                                                                   // Vertex Array Object For Interpolate Curve
 	unsigned int GL_VBO_Inter;                                                                                   // Vertex Buffer Object For Interpolate Curve
-	
+	glm::mat4 GL_Projection;                                                                                     // Projection Matrix
+
 	struct GLFWWindowDeleter                                                                                     // Window Pointer Deleter
 	{
 		void operator()(GLFWwindow* window) const 
@@ -45,6 +50,7 @@ public:
 
 	std::unique_ptr<Shader, Shader::ShaderDeleter> GL_shader;                                                     // Shader Pointer
 
+	std::unique_ptr<ImGuiApp, ImGuiApp::ImGuiAppDeleter> GL_ImGuiObject;
 public:
 	OpenGLApp(const std::string& WindowName,int initHeight,int initWidth,int MajorVersion,int MinorVersion);
 	~OpenGLApp();
@@ -58,6 +64,7 @@ public:
 private:
 	bool InitShader();
 	bool InitResources();
+	bool InitImGui();
 };
 
 #endif // !OPENGLAPP_H
