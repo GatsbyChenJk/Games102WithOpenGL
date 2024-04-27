@@ -9,7 +9,8 @@ OpenGLApp::OpenGLApp(const std::string& WindowName, int initWidth, int initHeigh
 	GL_windowWidth(initWidth),
 	GL_MajorVersion(MajorVersion),
 	GL_MinorVersion(MinorVersion),
-	GL_Projection(glm::ortho(-6.0f, 6.0f, -6.0f, 6.0f, -1.0f, 1.0f))
+	GL_Projection(glm::ortho(-6.0f, 6.0f, -6.0f, 6.0f, -1.0f, 1.0f)),
+	GL_Viewing(glm::mat4(1.0f))
 {
 }
 
@@ -192,11 +193,12 @@ void OpenGLApp::UpdateWindow()
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		GL_ImGuiObject.get()->SetUIDetail(GL_Projection);
+		GL_ImGuiObject.get()->SetUIDetail(GL_Viewing, GL_Projection);
 		GL_ImGuiObject.get()->RenderOnWindow(GL_window.get());
 		// render
 		GL_shader.get()->use();
 		// set vertex range by projection matrix		
+		GL_shader.get()->setMat4("viewing", GL_Viewing);
 		GL_shader.get()->setMat4("projection", GL_Projection);
 
 		glBindVertexArray(GL_VAO);

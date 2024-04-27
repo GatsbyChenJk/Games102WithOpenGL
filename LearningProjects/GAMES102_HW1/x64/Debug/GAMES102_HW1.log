@@ -1,3 +1,2 @@
-﻿  OpenGLApp.cpp
-D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\OpenGLApp.cpp(101,36): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+﻿  ImGuiApp.cpp
   GAMES102_HW1.vcxproj -> D:\Programming\Games102WithOpenGL\LearningProjects\x64\Debug\GAMES102_HW1.exe

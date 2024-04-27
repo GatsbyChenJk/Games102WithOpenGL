@@ -34,7 +34,8 @@ public:
 	unsigned int GL_VAO_Inter;                                                                                   // Vertex Array Object For Interpolate Curve
 	unsigned int GL_VBO_Inter;                                                                                   // Vertex Buffer Object For Interpolate Curve
 	glm::mat4 GL_Projection;                                                                                     // Projection Matrix
-
+	glm::mat4 GL_Viewing;                                                                                        // Camera Transform (Viewing) Matrix
+	
 	struct GLFWWindowDeleter                                                                                     // Window Pointer Deleter
 	{
 		void operator()(GLFWwindow* window) const 

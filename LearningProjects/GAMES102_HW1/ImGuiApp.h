@@ -35,13 +35,15 @@ public:
 	std::unique_ptr<ImGuiIO,ImGuiIODeleter> GL_ImGuiIO;
 	std::string GL_ImGui_Name;
 	std::string GL_Shader_Version;
+private:
+	float GL_MouseMoveSpeed;
 
 public:
 	ImGuiApp() = default;
 	~ImGuiApp();
 	ImGuiApp(const std::string& GuiName,const std::string& ShaderVersion);
 	bool Init(GLFWwindow* windowPtr);
-	void SetUIDetail(glm::mat4& projection);
+	void SetUIDetail(glm::mat4& viewing, glm::mat4& projection);
 	void RenderOnWindow(GLFWwindow* windowPtr);
 	void Destroy();
 	static std::unique_ptr<ImGuiApp, ImGuiAppDeleter> createImGuiPtr(const char* GuiName, const char* ShaderVersion)
