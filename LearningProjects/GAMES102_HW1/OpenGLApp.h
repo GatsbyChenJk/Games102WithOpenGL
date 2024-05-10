@@ -16,27 +16,31 @@
 #include <imgui/imgui_impl_opengl3.h>
 #include "Shader.h"
 #include "Interpolation.h"
+#include "Fitting.h"
 #include "ImGuiApp.h"
 
 class OpenGLApp
 {
 private:
 	int vectorSize;
-
 public:
 	int GL_MajorVersion;
 	int GL_MinorVersion;
 	
-	unsigned int GL_VAO;                                                                                         // Vertex Array Object For Axis
-	unsigned int GL_VBO;                                                                                         // Vertex Buffer Object For Axis
-	unsigned int GL_VAO_Func;                                                                                    // Vertex Array Object For Func Curve
-	unsigned int GL_VBO_Func;                                                                                    // Vertex Buffer Object For Func Curve 
-	unsigned int GL_VAO_Inter;                                                                                   // Vertex Array Object For Interpolate Curve
-	unsigned int GL_VBO_Inter;                                                                                   // Vertex Buffer Object For Interpolate Curve
-	glm::mat4 GL_Projection;                                                                                     // Projection Matrix
-	glm::mat4 GL_Viewing;                                                                                        // Camera Transform (Viewing) Matrix
+	GLuint GL_VAO;                                                                                         // Vertex Array Object For Axis
+	GLuint GL_VBO;                                                                                         // Vertex Buffer Object For Axis
+	GLuint GL_VAO_Func;                                                                                    // Vertex Array Object For Func Curve
+	GLuint GL_VBO_Func;                                                                                    // Vertex Buffer Object For Func Curve 
+	GLuint GL_VAO_Inter;                                                                                   // Vertex Array Object For Interpolate Curve
+	GLuint GL_VBO_Inter;                                                                                   // Vertex Buffer Object For Interpolate Curve
+	GLuint GL_VAO_Fit;																					   // Vertex Array Object For Fitting Curve
+	GLuint GL_VBO_Fit;																					   // Vertex Buffer Object For Fitting Curve
+	GLuint GL_VAO_Dis;
+	GLuint GL_VBO_Dis;
+	glm::mat4 GL_Projection;                                                                               // Projection Matrix
+	glm::mat4 GL_Viewing;                                                                                  // Camera Transform (Viewing) Matrix
 	
-	struct GLFWWindowDeleter                                                                                     // Window Pointer Deleter
+	struct GLFWWindowDeleter                                                                               // Window Pointer Deleter
 	{
 		void operator()(GLFWwindow* window) const 
 		{

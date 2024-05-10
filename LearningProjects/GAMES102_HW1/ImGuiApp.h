@@ -11,7 +11,6 @@
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
 
-
 class ImGuiApp
 {
 public:
@@ -36,14 +35,15 @@ public:
 	std::string GL_ImGui_Name;
 	std::string GL_Shader_Version;
 private:
-	float GL_MouseMoveSpeed;
+	float GL_MouseDragSpeed;
+	float GL_MouseRollSpeed;
 
 public:
 	ImGuiApp() = default;
 	~ImGuiApp();
 	ImGuiApp(const std::string& GuiName,const std::string& ShaderVersion);
 	bool Init(GLFWwindow* windowPtr);
-	void SetUIDetail(glm::mat4& viewing, glm::mat4& projection);
+	void SetDebugTransform(glm::mat4& viewing, glm::mat4& projection);
 	void RenderOnWindow(GLFWwindow* windowPtr);
 	void Destroy();
 	static std::unique_ptr<ImGuiApp, ImGuiAppDeleter> createImGuiPtr(const char* GuiName, const char* ShaderVersion)

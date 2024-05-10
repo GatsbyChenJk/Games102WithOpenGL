@@ -1,14 +1,11 @@
 #pragma once
 #include "Interpolation.h"
 
-bool CompareVec2ByX(const glm::vec2& a, const glm::vec2& b)
-{
-	return a.x < b.x;
-}
 
 Interpolation::Interpolation(std::vector<glm::vec2> inputs)
 	:observationPoints(std::move(inputs))
 {
+	auto CompareVec2ByX = [](const glm::vec2& a, const glm::vec2& b) {return a.x < b.x;};
 	std::sort(observationPoints.begin(),observationPoints.end(),CompareVec2ByX);
 }
 
