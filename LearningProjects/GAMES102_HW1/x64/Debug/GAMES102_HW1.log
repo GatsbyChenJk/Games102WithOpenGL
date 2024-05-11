@@ -1,2 +1,16 @@
-﻿  OpenGLApp.cpp
+﻿  Interpolation.cpp
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\Interpolation.cpp(22,29): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\Interpolation.cpp(44,29): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\Interpolation.cpp(83,39): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW1\Interpolation.cpp(84,38): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  OpenGLApp.cpp
+  正在生成代码...
   GAMES102_HW1.vcxproj -> D:\Programming\Games102WithOpenGL\LearningProjects\x64\Debug\GAMES102_HW1.exe

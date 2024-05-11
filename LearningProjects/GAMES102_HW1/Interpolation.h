@@ -5,14 +5,16 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 enum InterpolationMethod
 {
+	MutiCoef,
 	Lagrange,
-	NewTon
+	NewTon,
 };
 
 class Interpolation
@@ -28,6 +30,8 @@ public:
 	Interpolation(std::vector<glm::vec2> inputs);
 	~Interpolation() = default;
 private:
+	// MutiCoef Method
+	void GetMutiCoef(int dimension);
 	// Lagrange Method
 	float GetBaseFunction2D(float x, float x_0, float x_1, float x_2);
 	// Newton Method
