@@ -30,6 +30,9 @@
     <ClInclude Include="OpenGLApp.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="RBFNetwork.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HW2.cpp">
@@ -66,6 +69,9 @@
       <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\libs\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RBFNetwork.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

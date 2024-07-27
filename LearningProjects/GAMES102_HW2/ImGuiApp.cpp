@@ -1,4 +1,4 @@
-#include "ImGuiApp.h"
+﻿#include "ImGuiApp.h"
 
 ImGuiApp::ImGuiApp(const std::string& GuiName, const std::string& ShaderVersion)
 	:GL_ImGui_Name(GuiName),

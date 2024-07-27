@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef IMGUIAPP_H
 #define IMGUIAPP_H
 #include <GLFW/glfw3.h>

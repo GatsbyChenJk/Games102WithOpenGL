@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef OPENGLAPP_H
 #define OPENGLAPP_H
 
@@ -16,6 +16,7 @@
 #include <imgui/imgui_impl_opengl3.h>
 #include "Shader.h"
 #include "ImGuiApp.h"
+#include "RBFNetwork.h"
 
 class OpenGLApp
 {
@@ -29,9 +30,11 @@ public:
 	GLuint GL_VBO;                                                                                         // Vertex Buffer Object For Axis
 	GLuint GL_VAO_Func;                                                                                    // Vertex Array Object For Func Curve
 	GLuint GL_VBO_Func;                                                                                    // Vertex Buffer Object For Func Curve 
-	
-	GLuint GL_VAO_Dis;
-	GLuint GL_VBO_Dis;
+	GLuint GL_VAO_RBF;																					// Vertex Array Object For Input points (DataSet)
+	GLuint GL_VBO_RBF;																					// Vertex Buffer Object For Input points (DataSet)
+	GLuint GL_VAO_Estimate;																			// Vertex Array Object For Estimate points
+	GLuint GL_VBO_Estimate;																			// Vertex Buffer Object For Estimate points
+
 	glm::mat4 GL_Projection;                                                                               // Projection Matrix
 	glm::mat4 GL_Viewing;                                                                                  // Camera Transform (Viewing) Matrix
 	

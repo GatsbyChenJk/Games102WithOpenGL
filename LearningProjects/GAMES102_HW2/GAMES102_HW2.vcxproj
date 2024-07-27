@@ -140,6 +140,7 @@
     <ClInclude Include="GladApp.h" />
     <ClInclude Include="ImGuiApp.h" />
     <ClInclude Include="OpenGLApp.h" />
+    <ClInclude Include="RBFNetwork.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,7 @@
     <ClCompile Include="HW2.cpp" />
     <ClCompile Include="ImGuiApp.cpp" />
     <ClCompile Include="OpenGLApp.cpp" />
+    <ClCompile Include="RBFNetwork.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>

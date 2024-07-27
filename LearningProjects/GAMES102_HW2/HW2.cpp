@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -7,7 +7,7 @@
 int main()
 {
     // set window name  
-    std::string AppName = "Man,what can I say? RBF Netural Network OUT!";
+    std::string AppName = "Man,what can I say? RBF Neural Network OUT!";
     // set basic info
     OpenGLApp myOpenGLApp(AppName, 1000, 800, 3, 3);
     // initialization
