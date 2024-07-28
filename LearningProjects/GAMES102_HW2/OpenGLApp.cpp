@@ -113,57 +113,49 @@ bool OpenGLApp::InitResources()
 	{
 		for (float j = static_cast<float>(i);j < static_cast<float>(i + 1);j += 0.1f)
 		{
-			functionPoints.push_back(glm::vec3(j, static_cast<float>(exp(sin(j) + log(j))), 0.0f));  // position
+			functionPoints.push_back(glm::vec3(j, static_cast<float>(exp(log(j)+sin(j))), 0.0f));  // position
 			functionPoints.push_back(glm::vec3(0.0f, 0.0f, 0.0f));												  // color : dark
 		}
 	}
 	vectorSize = static_cast<int>(functionPoints.size());
+	std::cout << "func points:" << vectorSize/2 << std::endl;
 
-	// debug point vector
-	vector<glm::vec2> debugPoints;
-	debugPoints.push_back(glm::vec2(functionPoints[0].x, functionPoints[0].y));
-	debugPoints.push_back(glm::vec2(functionPoints[14].x, functionPoints[14].y));
-	debugPoints.push_back(glm::vec2(functionPoints[20].x, functionPoints[20].y));
-	debugPoints.push_back(glm::vec2(functionPoints[28].x, functionPoints[28].y));
-	debugPoints.push_back(glm::vec2(functionPoints[46].x, functionPoints[46].y));
-	debugPoints.push_back(glm::vec2(functionPoints[60].x, functionPoints[60].y));
-	debugPoints.push_back(glm::vec2(functionPoints[74].x, functionPoints[74].y));
-	debugPoints.push_back(glm::vec2(functionPoints[88].x, functionPoints[88].y));
-	debugPoints = PointAdjuster_2D(debugPoints);
+	// a nerual network with one-dimension input and output along with 5 node hidden layer
+	RBFNetwork RBFNetFunc(1, 15, 1);
+	// -------------------------------------------------------------------------------------------------------------------
 
-	std::vector<glm::vec3> debugPointsForRender;
-	for (auto it = debugPoints.begin();it != debugPoints.end();it++)
+	std::random_device rd_train;
+	std::mt19937 gen(rd_train());
+	std::normal_distribution<> dist(106, 40);
+
+	// train 5 times with 20 random data each time
+	for (int j = 0; j < 10;j++)
 	{
-		debugPointsForRender.push_back(glm::vec3(it->x, it->y, 0.0f));
-		debugPointsForRender.push_back(glm::vec3(0.0f, 0.0f, 1.0f));
+		// dataset for training
+		vector<vector<double>> input, output;
+		// -------------------------------------------------------------------------------------------------------------------
+		// generate 20 points randomly for dataset
+		for (int i = 0;i < 30;i++)
+		{
+			int evenNum = static_cast<int>(dist(gen));
+			if (evenNum < 0 || evenNum > 212)
+			{
+				do {
+					evenNum = static_cast<int>(dist(gen));
+				} while (evenNum < 0 || evenNum > 212);
+			}
+			if (evenNum % 2 != 0)
+			{
+				evenNum++;
+				if (evenNum > 212)
+					evenNum--;
+			}
+	
+			input.push_back({ functionPoints[evenNum].x });
+			output.push_back({ functionPoints[evenNum].y });
+		}
+		RBFNetFunc.training(input, output, 0.0001, LSM,1);
 	}
-	// -------------------------------------------------------------------------------------------------------------------
-
-	// create dataset for training
-	vector<vector<double>> input, output;
-	input.push_back({ functionPoints[0].x });
-	input.push_back({ functionPoints[14].x });
-	input.push_back({ functionPoints[20].x });
-	input.push_back({ functionPoints[28].x });
-	input.push_back({ functionPoints[46].x });
-	input.push_back({ functionPoints[60].x });
-	input.push_back({ functionPoints[74].x });
-	output.push_back({ functionPoints[88].x });
-
-	output.push_back({ functionPoints[0].y });
-	output.push_back({ functionPoints[14].y });
-	output.push_back({ functionPoints[20].y });
-	output.push_back({ functionPoints[28].y });
-	output.push_back({ functionPoints[46].y });
-	output.push_back({ functionPoints[60].y });
-	output.push_back({ functionPoints[74].y });
-	output.push_back({ functionPoints[88].y });
-
-	// -------------------------------------------------------------------------------------------------------------------
-	// create a nerual network with one-dimension input and output along with 5 node hidden layer
-	RBFNetwork RBFNetFunc(1, 5, 1);
-	RBFNetFunc.train(input,output,0.01);
-	// -------------------------------------------------------------------------------------------------------------------
 	
 	// generate Netsfunc points which want to be interpolated
 	std::vector<glm::vec3> NetfunctionPoints;
@@ -220,20 +212,20 @@ bool OpenGLApp::InitResources()
 	// -------------------------------------------------------------------------------------------------------------------
 
 	// ------------------ discrete point objects ------------------------------------------------------------------
-	glGenVertexArrays(1, &GL_VAO_RBF);
-	glGenBuffers(1, &GL_VBO_RBF);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(GL_VAO_RBF);
+	//glGenVertexArrays(1, &GL_VAO_RBF);
+	//glGenBuffers(1, &GL_VBO_RBF);
+	//// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+	//glBindVertexArray(GL_VAO_RBF);
 
-	glBindBuffer(GL_ARRAY_BUFFER, GL_VBO_RBF);
-	glBufferData(GL_ARRAY_BUFFER, debugPointsForRender.size() * sizeof(glm::vec3) * 2, debugPointsForRender.data(), GL_STATIC_DRAW);
-	glPointSize(8.0f);
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)0);
-	glEnableVertexAttribArray(0);
-	// color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)(sizeof(glm::vec3)));
-	glEnableVertexAttribArray(1);
+	//glBindBuffer(GL_ARRAY_BUFFER, GL_VBO_RBF);
+	//glBufferData(GL_ARRAY_BUFFER, debugPointsForRender.size() * sizeof(glm::vec3) * 2, debugPointsForRender.data(), GL_STATIC_DRAW);
+	//glPointSize(8.0f);
+	//// position attribute
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)0);
+	//glEnableVertexAttribArray(0);
+	//// color attribute
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)(sizeof(glm::vec3)));
+	//glEnableVertexAttribArray(1);
 	// -------------------------------------------------------------------------------------------------------------------
 
 	// ------------------Net func line objects -------------------------------------------------------------------------------
@@ -284,8 +276,8 @@ void OpenGLApp::UpdateWindow()
 		glBindVertexArray(GL_VAO_Estimate);
 		glDrawArrays(GL_LINE_STRIP, 0, vectorSize / 2);
 
-		glBindVertexArray(GL_VAO_RBF);
-		glDrawArrays(GL_POINTS, 0, 8);
+		/*glBindVertexArray(GL_VAO_RBF);
+		glDrawArrays(GL_POINTS, 0, 14);*/
 		
 		glfwPollEvents();
 		glfwSwapBuffers(GL_window.get());
@@ -296,8 +288,8 @@ void OpenGLApp::UpdateWindow()
 	glDeleteBuffers(1, &GL_VBO);
 	glDeleteVertexArrays(1, &GL_VAO_Func);
 	glDeleteBuffers(1, &GL_VBO_Func);
-	glDeleteVertexArrays(1, &GL_VAO_RBF);
-	glDeleteBuffers(1, &GL_VBO_RBF);
+	/*glDeleteVertexArrays(1, &GL_VAO_RBF);
+	glDeleteBuffers(1, &GL_VBO_RBF);*/
 	glDeleteVertexArrays(1, &GL_VAO_Estimate);
 	glDeleteBuffers(1, &GL_VBO_Estimate);
 

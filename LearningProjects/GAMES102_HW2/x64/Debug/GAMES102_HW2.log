@@ -1,2 +1,5 @@
-﻿  OpenGLApp.cpp
+﻿  RBFNetwork.cpp
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW2\KMeans.h(15,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW2\KMeans.h(16,1): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\Programming\Games102WithOpenGL\LearningProjects\GAMES102_HW2\RBFNetwork.cpp(91,34): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   GAMES102_HW2.vcxproj -> D:\Programming\Games102WithOpenGL\LearningProjects\x64\Debug\GAMES102_HW2.exe

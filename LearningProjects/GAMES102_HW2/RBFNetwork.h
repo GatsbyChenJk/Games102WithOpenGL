@@ -3,8 +3,17 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
+#include <algorithm>
+#include "KMeans.h"
 
 using namespace std;
+
+enum TrainingAlgorithm
+{
+    LSM,
+    GD,
+    BP
+};
 
 class RBFNetwork {
 private:
@@ -23,10 +32,15 @@ private:
 
 public:
     RBFNetwork(int input, int hidden, int output);
+    RBFNetwork(int input, int hidden, int output, vector<vector<double>> inputs);
     // 前馈计算
     void feedForward(const vector<double>& input, vector<double>& output);
     // 训练 RBF 网络（使用简单的最小二乘法更新权重）
-    void train(const vector<vector<double>>& inputs, const vector<vector<double>>& targets, double learningRate);
+    void trainWithLSM(const vector<vector<double>>& inputs, const vector<vector<double>>& targets, double learningRate);
+    // using GD to train
+    void trainWithGD(const vector<vector<double>>& inputs, const vector<vector<double>>& targets, double learningRate);
     // using SGD and Backward to train
-    void trainWithBack();
+    void trainWithBP(const vector<vector<double>>& inputs, const vector<vector<double>>& targets, double learningRate);
+
+    void training(const vector<vector<double>>& inputs, const vector<vector<double>>& targets, double learningRate, TrainingAlgorithm method = LSM, int times = 5);
 };

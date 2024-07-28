@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="GladApp.h" />
     <ClInclude Include="ImGuiApp.h" />
+    <ClInclude Include="KMeans.h" />
     <ClInclude Include="OpenGLApp.h" />
     <ClInclude Include="RBFNetwork.h" />
     <ClInclude Include="Shader.h" />
